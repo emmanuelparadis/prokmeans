@@ -1,0 +1,3 @@
+useDynLib(prokmeans, .registration = TRUE)
+export(kmeansConstr, pkm, skm)
+importFrom(stats, kmeans)
