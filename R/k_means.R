@@ -1,8 +1,8 @@
-## k_means.R (2023-08-16)
+## k_means.R (2024-02-06)
 
 ##   Probabilistic K-Means
 
-## Copyright 2023 Emmanuel Paradis
+## Copyright 2023-2024 Emmanuel Paradis
 
 ## This file is part of the R-package `prokmeans'.
 ## See the file ../COPYING for licensing issues.
@@ -42,10 +42,10 @@ kmeansConstr <- function(x, cluster, K, iter.lim = 100,
         stop("nrow(x) and length(cluster) must be equal.")
     cls0 <- as.integer(cluster)
     cls0[is.na(cluster)] <- 0L
-    cls0[cls0 <= 0L] <- 0L
+    cls0[cls0 < 0L] <- 0L
     mx <- max(cls0)
     if (mx > K)
         stop(sprintf("Maximum value in cluster (%d) greater than K (%d).\nMaybe you want K = %d.\n", mx, K, mx))
     PARS <- as.integer(c(K, iter.lim, restart.max, diag4restart, !quiet))
-    .Call(kmeansConstr_Call, x, cluster, PARS)
+    .Call(kmeansConstr_Call, x, cls0, PARS)
 }
